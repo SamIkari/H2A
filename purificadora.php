@@ -39,7 +39,7 @@
     <nav class="fixed top-0 w-full z-[100] transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-slate-100" id="navbar">
         <div class="container mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <img src="H2A/Imagenes/Logo1.png" alt="Logo H2A" class="h-12 w-auto">
+                <img src="H2A/Imagenes/logo-agua.png" alt="Logo H2A" class="h-12 w-auto">
                 <a href="/" class="text-2xl font-black tracking-tighter hidden sm:block">H2<span class="text-cyan-500">A</span></a>
             </div>
 
@@ -162,17 +162,21 @@
 
     <section class="py-24 bg-white">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-5xl font-black mb-16 tracking-tighter uppercase italic text-slate-900">Rutas de Distribución</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 text-left">
-                <div class="group relative overflow-hidden rounded-[2.5rem] h-[400px] shadow-2xl">
-                    <img src="H2A/Imagenes/Ruta-Ciudad.jpg" alt="Ruta Local" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
-                    <div class="absolute bottom-10 left-10">
-                        <h4 class="text-white text-3xl font-black uppercase tracking-tighter">Ruta Local</h4>
-                        <p class="text-cyan-400 font-bold uppercase text-xs mt-2 tracking-widest">Acaponeta Centro</p>
+            <h2 class="text-5xl font-black mb-16 tracking-tighter uppercase italic text-slate-900">Ruta de Distribución</h2>
+
+            <div class="flex justify-center">
+                <div class="w-full lg:w-2/3">
+                    <div class="group relative overflow-hidden rounded-[2.5rem] h-[400px] shadow-2xl text-left">
+                        <img src="H2A/Imagenes/Ruta-Ciudad.jpg" alt="Ruta Local" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute bottom-10 left-10">
+                            <h4 class="text-white text-3xl font-black uppercase tracking-tighter">Ruta Local</h4>
+                            <p class="text-cyan-400 font-bold uppercase text-xs mt-2 tracking-widest">Acaponeta Centro y alrededores</p>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
