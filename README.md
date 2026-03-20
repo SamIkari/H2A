@@ -1,0 +1,1 @@
+Proyecto web desarrollado para H2A, una empresa dedicada a la purificación y distribución de agua, así como la venta de hielo. La plataforma tiene como objetivo mostrar los servicios, productos y rutas de distribución, brindando a los usuarios una forma clara y atractiva de conocer la empresa.
