@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H2A | Purificadora Aguiar - Calidad desde 2020</title>
+    <link rel="shortcut icon" href="H2A/Imagenes/LogoCorto.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #0ea5e9, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        #mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-slate-900">
+
+    <nav class="fixed top-0 w-full z-[100] transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-slate-100" id="navbar">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <img src="H2A/Imagenes/Logo1.png" alt="Logo H2A" class="h-12 w-auto">
+                <a href="/" class="text-2xl font-black tracking-tighter hidden sm:block">H2<span class="text-cyan-500">A</span></a>
+            </div>
+
+            <ul class="hidden md:flex gap-8 font-bold text-sm uppercase tracking-widest text-slate-600">
+                <li><a href="/" class="hover:text-cyan-500 transition-colors">Inicio</a></li>
+                <li><a href="#nosotros" class="hover:text-cyan-500 transition-colors">Nosotros</a></li>
+                <li><a href="#servicios" class="hover:text-cyan-500 transition-colors">Servicios</a></li>
+                <li><a href="#pedidos" class="hover:text-cyan-500 transition-colors">Hacer Pedido</a></li>
+            </ul>
+
+            <div class="flex items-center gap-4">
+                <a href="tel:523112007410" class="hidden sm:block bg-slate-900 text-white px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest hover:bg-cyan-500 transition-all">
+                    Llamar
+                </a>
+                <button id="menu-btn" class="md:hidden text-slate-900 focus:outline-none">
+                    <i class="fa-solid fa-bars-staggered text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="absolute top-20 left-0 w-full bg-white border-b border-slate-100 md:hidden pointer-events-none">
+            <ul class="flex flex-col p-6 gap-6 font-bold text-sm uppercase tracking-widest text-slate-600">
+                <li><a href="/" class="mobile-link block py-2">Inicio</a></li>
+                <li><a href="#nosotros" class="mobile-link block py-2">Nosotros</a></li>
+                <li><a href="#servicios" class="mobile-link block py-2">Servicios</a></li>
+                <li><a href="#pedidos" class="mobile-link block py-2 text-cyan-600">Hacer Pedido</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="inicio" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-slate-950">
+        <div class="absolute inset-0 opacity-50">
+            <video src="H2A/Videos/Agua.mov" autoplay muted loop class="w-full h-full object-cover"></video>
+            <div class="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/40 to-slate-950"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center md:text-left">
+            <span class="inline-block px-4 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 text-[10px] font-black uppercase tracking-[0.3em] mb-6">Acaponeta, Nayarit</span>
+            <h1 class="text-4xl md:text-7xl lg:text-8xl font-black text-white leading-none tracking-tighter mb-4">
+                Agua 100% <br> <span class="text-gradient uppercase">Purificada</span>
+            </h1>
+            <h2 class="text-2xl md:text-4xl font-light text-slate-300 mb-10 tracking-widest uppercase">Purificadora Aguiar</h2>
+
+            <div class="flex flex-wrap justify-center md:justify-start gap-6">
+                <a href="#pedidos" class="px-10 py-5 bg-cyan-600 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-cyan-500 transition-all shadow-lg shadow-cyan-600/20">Pedir Ahora</a>
+                <div class="flex items-center gap-4 text-white font-bold px-6 py-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10">
+                    <span class="flex h-3 w-3 rounded-full bg-green-500 animate-pulse"></span>
+                    Abierto: 7:00 AM - 6:00 PM
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros" class="py-24 lg:py-40 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="w-full lg:w-1/2 relative">
+                    <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-slate-50">
+                        <img src="H2A/Imagenes/purificadora2.jpg" alt="Purificadora Aguiar" class="w-full h-auto">
+                    </div>
+                    <div class="absolute -top-10 -left-10 w-32 h-32 md:w-48 md:h-48 bg-white p-4 rounded-full shadow-xl flex items-center justify-center">
+                        <img src="H2A/Imagenes/logo-agua.png" alt="Logo Agua" class="w-4/5 h-auto">
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <span class="text-cyan-600 font-black uppercase tracking-[0.3em] text-xs">Desde Julio 2020</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-slate-900 mt-4 mb-8 leading-tight italic">Nuestra Historia</h2>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-8">
+                        Fundada por <strong>Jorge Luis Elías Aguiar</strong> el 5 de julio de 2020, celebramos un compromiso inquebrantable con la calidad. Durante este tiempo, nos hemos consolidado como un referente en la industria gracias al liderazgo y visión de nuestro fundador.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 border-t border-slate-100 pt-8">
+                        <div class="flex items-center gap-4">
+                            <i class="fas fa-droplet text-cyan-500 text-2xl"></i>
+                            <p class="text-sm font-bold text-slate-700 uppercase">Pureza Garantizada</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i class="fas fa-truck text-cyan-500 text-2xl"></i>
+                            <p class="text-sm font-bold text-slate-700 uppercase">Servicio Diario</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="py-24 bg-slate-50 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <img src="H2A/Imagenes/agua2.jpg" alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl font-black text-slate-900 uppercase tracking-tighter">Nuestros Servicios</h2>
+                <div class="w-24 h-1.5 bg-cyan-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                <div class="bg-white/80 backdrop-blur-lg p-12 rounded-[3rem] border border-white shadow-xl hover:-translate-y-2 transition-all text-center">
+                    <div class="w-20 h-20 bg-cyan-600 text-white rounded-3xl flex items-center justify-center text-3xl mx-auto mb-8 shadow-lg shadow-cyan-600/30">
+                        <i class="fas fa-hand-sparkles"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-6 uppercase">Higiene</h3>
+                    <p class="text-slate-600 text-base leading-relaxed">Aseguramos una higiene impecable, superando rigurosamente los estándares de salud.</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur-lg p-12 rounded-[3rem] border border-white shadow-xl hover:-translate-y-2 transition-all text-center">
+                    <div class="w-20 h-20 bg-blue-500 text-white rounded-3xl flex items-center justify-center text-3xl mx-auto mb-8 shadow-lg shadow-blue-500/30">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-6 uppercase">Procesamiento</h3>
+                    <p class="text-slate-600 text-base leading-relaxed">Filtros de alta tecnología esenciales para eliminar impurezas del agua.</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur-lg p-12 rounded-[3rem] border border-white shadow-xl hover:-translate-y-2 transition-all text-center">
+                    <div class="w-20 h-20 bg-cyan-800 text-white rounded-3xl flex items-center justify-center text-3xl mx-auto mb-8 shadow-lg shadow-cyan-800/30">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-6 uppercase">Ósmosis Inversa</h3>
+                    <p class="text-slate-600 text-base leading-relaxed">Proceso eficaz para garantizar agua potable segura, limpia y de gran sabor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-5xl font-black mb-16 tracking-tighter uppercase italic text-slate-900">Rutas de Distribución</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 text-left">
+                <div class="group relative overflow-hidden rounded-[2.5rem] h-[400px] shadow-2xl">
+                    <img src="H2A/Imagenes/Ruta-Ciudad.jpg" alt="Ruta Local" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-10 left-10">
+                        <h4 class="text-white text-3xl font-black uppercase tracking-tighter">Ruta Local</h4>
+                        <p class="text-cyan-400 font-bold uppercase text-xs mt-2 tracking-widest">Acaponeta Centro</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-slate-950 relative overflow-hidden" id="pedidos">
+        <div class="container mx-auto px-6">
+            <div class="relative overflow-hidden rounded-[3.5rem] bg-slate-900 border border-slate-800 shadow-2xl">
+                <div class="flex flex-col lg:flex-row min-h-[550px]">
+                    <div class="relative w-full lg:w-1/2 min-h-[300px]">
+                        <img src="H2A/Imagenes/Llenogarrafon.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-60">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-900 hidden lg:block"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 lg:hidden"></div>
+                    </div>
+                    <div class="w-full lg:w-1/2 p-12 lg:p-20 flex flex-col justify-center text-center lg:text-left">
+                        <h2 class="text-5xl md:text-6xl font-black text-white leading-none mb-8">¿Hacemos tu <br><span class="text-gradient">pedido hoy?</span></h2>
+                        <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
+                            <a href="https://wa.me/5213112007410" class="bg-[#25D366] text-white px-8 py-5 rounded-2xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 hover:scale-105 transition-all">
+                                <i class="fab fa-whatsapp text-xl"></i> WhatsApp
+                            </a>
+                            <a href="tel:523112007410" class="bg-cyan-600 text-white px-8 py-5 rounded-2xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 hover:scale-105 transition-all">
+                                <i class="fas fa-phone-alt"></i> Llamar Ahora
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 text-slate-400 pt-24 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-20 border-b border-slate-800/60 text-center md:text-left">
+                <div>
+                    <a href="/" class="text-3xl font-black text-white tracking-tighter mb-6 block">H2<span class="text-cyan-500">A</span></a>
+                    <p class="text-sm">Zacatecas #12 Sur. Nayarit, México. Purificadora Aguiar.</p>
+                </div>
+                <div>
+                    <h5 class="text-white text-xs font-black uppercase tracking-widest mb-8">Navegación</h5>
+                    <ul class="space-y-4 text-sm font-bold">
+                        <li><a href="/" class="hover:text-white transition-colors">Inicio</a></li>
+                        <li><a href="#nosotros" class="hover:text-white transition-colors">Nosotros</a></li>
+                        <li><a href="#servicios" class="hover:text-white transition-colors">Servicios</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white text-xs font-black uppercase tracking-widest mb-8">Contacto</h5>
+                    <p class="text-sm mb-4">h2a.aguiar@gmail.com</p>
+                    <p class="text-sm">325-25-13-00</p>
+                </div>
+                <div>
+                    <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800">
+                        <p class="text-white font-black mb-2 uppercase text-[10px]">Lun — Dom</p>
+                        <p class="text-xl font-black text-cyan-400 italic">7:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <p class="pt-10 text-center text-[10px] font-bold uppercase tracking-widest">&copy; 2026 Purificadora Aguiar</p>
+        </div>
+    </footer>
+
+    <button id="btn-up" class="fixed bottom-8 right-8 z-[110] w-14 h-14 bg-blue-600/20 backdrop-blur-lg border border-white/20 text-blue-600 rounded-2xl flex items-center justify-center shadow-2xl opacity-0 translate-y-10 pointer-events-none transition-all duration-500 hover:bg-blue-600 hover:text-white group">
+        <i class="fa-solid fa-chevron-up text-xl group-hover:-translate-y-1 transition-transform"></i>
+    </button>
+
+
+    <script>
+        if (window.location.pathname.includes('purificadora')) {
+            window.history.replaceState(null, null, "/");
+        }
+
+        document.querySelectorAll('a[href^="#"], a[href="/"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '/') {
+                    window.location.href = 'index.php';
+                } else if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        history.pushState("", document.title, window.location.pathname);
+                    }
+                }
+            });
+        });
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            mobileMenu.classList.toggle('pointer-events-none');
+        });
+
+        window.onscroll = function() {
+            const nav = document.getElementById('navbar');
+            if (window.pageYOffset > 50) {
+                nav.classList.add('py-2', 'shadow-lg');
+            } else {
+                nav.classList.remove('py-2', 'shadow-lg');
+            }
+        };
+        // Lógica del Botón Volver Arriba
+        const btnUp = document.getElementById('btn-up');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 400) {
+                // Aparece el botón
+                btnUp.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+                btnUp.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            } else {
+                // Desaparece el botón
+                btnUp.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+                btnUp.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            }
+        });
+
+        btnUp.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>

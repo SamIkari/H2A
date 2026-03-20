@@ -1,0 +1,18 @@
+RewriteEngine On
+RewriteBase /
+
+# 1. Definir que hieleria.php es el archivo principal (Index)
+# Esto hace que al entrar al dominio cargue este archivo sin mostrar el nombre
+DirectoryIndex hieleria.php index.php
+
+# 2. Si alguien intenta escribir /hieleria.php manualmente, lo mandamos a la raíz /
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /hieleria\.php\ HTTP/ [NC]
+RewriteRule ^hieleria\.php$ / [R=301,L]
+
+# 3. Lo mismo si escriben /hieleria sin extensión
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /hieleria\ HTTP/ [NC]
+RewriteRule ^hieleria$ / [R=301,L]
+
+# 4. Limpieza para el index.php viejo
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/ [NC]
+RewriteRule ^index\.php$ / [R=301,L]
