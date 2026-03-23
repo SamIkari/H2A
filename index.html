@@ -1,596 +1,1201 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="H2A/Imagenes/LogoCorto.png"
+      type="image/x-icon"
+    />
+    <title>H2A | Agua y Hielo</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#00d2ff",
+              secondary: "#3a7bd5",
+              dark: "#0f172a",
+              textMain: "#64748b",
+            },
+            fontFamily: {
+              montserrat: ["Montserrat", "sans-serif"],
+            },
+            transitionProperty: {
+              custom: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer components {
+        /* Estilos para el Hero Split que requieren pseudo-elementos complejos */
+        .split-side::before {
+          @apply content-[''] absolute top-0 left-0 w-full h-full bg-cover bg-center transition-transform duration-[1000ms] ease-in-out z-[1];
+        }
+        .split-side::after {
+          @apply content-[''] absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/20 to-black/60 z-[2];
+        }
+        .split-left::before {
+          background-image: url("H2A/Imagenes/Purificadora.jpg");
+        }
+        .split-right::before {
+          background-image: url("H2A/Imagenes/Hieleria.jpg");
+        }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="H2A/Imagenes/LogoCorto.png" type="image/x-icon">
-  <title>H2A | Agua y Hielo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#00d2ff',
-            secondary: '#3a7bd5',
-            dark: '#0f172a',
-            textMain: '#64748b',
-          },
-          fontFamily: {
-            montserrat: ['Montserrat', 'sans-serif'],
-          },
-          transitionProperty: {
-            'custom': 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+        .btn-explorar::before {
+          @apply content-[''] absolute top-0 left-0 w-full h-full bg-white translate-y-full transition-transform duration-300 z-[-1];
+        }
+        .btn-explorar:hover::before {
+          @apply translate-y-0;
+        }
+
+        .hours-badge {
+          animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        .btn-contact::after {
+          @apply content-[''] absolute top-[-50%] left-[-100%] w-1/2 h-[200%] bg-gradient-to-r from-transparent via-white/60 to-transparent rotate-[30deg];
+        }
+        .btn-contact:hover::after {
+          animation: shineEffect 0.8s ease;
+        }
+        @keyframes shineEffect {
+          100% {
+            left: 150%;
           }
         }
       }
-    }
-  </script>
-  <style type="text/tailwindcss">
-    @layer components {
-      /* Estilos para el Hero Split que requieren pseudo-elementos complejos */
-      .split-side::before {
-        @apply content-[''] absolute top-0 left-0 w-full h-full bg-cover bg-center transition-transform duration-[1000ms] ease-in-out z-[1];
-      }
-      .split-side::after {
-        @apply content-[''] absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/20 to-black/60 z-[2];
-      }
-      .split-left::before { background-image: url('H2A/Imagenes/Purificadora.jpg'); }
-      .split-right::before { background-image: url('H2A/Imagenes/Hieleria.jpg'); }
-      
-      .btn-explorar::before {
-        @apply content-[''] absolute top-0 left-0 w-full h-full bg-white translate-y-full transition-transform duration-300 z-[-1];
-      }
-      .btn-explorar:hover::before { @apply translate-y-0; }
+    </style>
+  </head>
 
-      .hours-badge { animation: float 4s ease-in-out infinite; }
-      @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-      }
+  <body class="font-montserrat bg-white overflow-x-hidden text-dark">
+    <nav
+      id="navbar"
+      class="fixed top-5 left-1/2 -translate-x-1/2 w-[90%] max-w-[1200px] px-8 py-3 flex justify-between items-center z-[1000] bg-dark/80 backdrop-blur-md border border-white/10 rounded-full transition-all duration-500"
+    >
+      <a
+        href="#inicio"
+        class="text-white font-black text-2xl tracking-tighter decoration-none logo-text"
+      >
+        H2<span class="text-primary transition-colors duration-300">A</span>
+      </a>
 
-      .btn-contact::after {
-        @apply content-[''] absolute top-[-50%] left-[-100%] w-1/2 h-[200%] bg-gradient-to-r from-transparent via-white/60 to-transparent rotate-[30deg];
-      }
-      .btn-contact:hover::after { animation: shineEffect 0.8s ease; }
-      @keyframes shineEffect { 100% { left: 150%; } }
-    }
-  </style>
-</head>
+      <button
+        id="menu-btn"
+        class="md:hidden text-white text-2xl focus:outline-none"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
 
-<body class="font-montserrat bg-white overflow-x-hidden text-dark">
+      <ul
+        id="menu-links"
+        class="hidden md:flex items-center gap-6 list-none absolute md:relative top-full left-0 w-full md:w-auto bg-dark/95 md:bg-transparent p-6 md:p-0 mt-4 md:mt-0 rounded-3xl md:rounded-none flex-col md:flex-row border border-white/10 md:border-none shadow-xl md:shadow-none"
+      >
+        <li>
+          <a
+            href="#nosotros"
+            class="nav-link text-white/90 font-semibold text-[0.75rem] uppercase tracking-widest hover:text-primary transition-colors"
+            >Nosotros</a
+          >
+        </li>
+        <li>
+          <a
+            href="#productos"
+            class="nav-link text-white/90 font-semibold text-[0.75rem] uppercase tracking-widest hover:text-primary transition-colors"
+            >Productos</a
+          >
+        </li>
+        <li>
+          <a
+            href="#pedidos"
+            class="nav-link text-white/90 font-semibold text-[0.75rem] uppercase tracking-widest hover:text-primary transition-colors"
+            >Pedidos</a
+          >
+        </li>
+      </ul>
+    </nav>
 
-  <nav id="navbar" class="fixed top-5 left-1/2 -translate-x-1/2 w-[90%] max-w-[1200px] px-8 py-3 flex justify-between items-center z-[1000] bg-dark/80 backdrop-blur-md border border-white/10 rounded-full transition-all duration-500 md:flex-row flex-col gap-4 md:gap-0">
-    <a href="#inicio" class="text-white font-black text-2xl tracking-tighter decoration-none logo-text">H2<span class="text-primary transition-colors duration-300">A</span></a>
-    <ul class="hidden md:flex items-center gap-6 list-none">
-      <li><a href="#nosotros" class="text-white/90 font-semibold text-[0.75rem] uppercase tracking-widest hover:text-primary transition-colors">Nosotros</a></li>
-      <li><a href="#productos" class="text-white/90 font-semibold text-[0.75rem] uppercase tracking-widest hover:text-primary transition-colors">Productos</a></li>
-      <li><a href="#pedidos" class="text-white/90 font-semibold text-[0.75rem] uppercase tracking-widest hover:text-primary transition-colors">Pedidos</a></li>
-    </ul>
-  </nav>
-
-  <div class="hero-container flex flex-col md:flex-row w-full h-screen overflow-hidden bg-black group" id="inicio">
-    <div class="split-side split-left relative flex-1 flex items-center justify-center transition-[flex] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden hover:flex-[1.5] group-hover:flex-[0.7] group-hover:hover:flex-[1.5]">
-      <div class="relative z-10 text-center text-white px-[10%] content">
-        <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] leading-none mb-8 uppercase tracking-tighter">
-          <span class="font-light block text-[0.9em] tracking-[2px]">Agua</span>
-          <span class="font-black block text-primary drop-shadow-[0_10px_30px_rgba(0,0,0,0.3)]">Purificada</span>
-        </h2>
-        <a href="purificadora.html" class="btn-explorar relative inline-block px-9 py-3.5 border-2 border-white/40 text-white font-bold text-[0.8rem] rounded-full uppercase tracking-[2px] overflow-hidden transition-all duration-300 z-[1] hover:text-dark hover:border-white hover:shadow-xl">Explorar</a>
-      </div>
-    </div>
-    <div class="split-side split-right relative flex-1 flex items-center justify-center transition-[flex] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden hover:flex-[1.5] group-hover:flex-[0.7] group-hover:hover:flex-[1.5]">
-      <div class="relative z-10 text-center text-white px-[10%] content">
-        <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] leading-none mb-8 uppercase tracking-tighter">
-          <span class="font-light block text-[0.9em] tracking-[2px]">Hielo</span>
-          <span class="font-black block text-[#aadcff] drop-shadow-[0_10px_30px_rgba(0,0,0,0.3)]">Refinado</span>
-        </h2>
-        <a href="hieleria.html" class="btn-explorar relative inline-block px-9 py-3.5 border-2 border-white/40 text-white font-bold text-[0.8rem] rounded-full uppercase tracking-[2px] overflow-hidden transition-all duration-300 z-[1] hover:text-dark hover:border-white hover:shadow-xl">Explorar</a>
-      </div>
-    </div>
-  </div>
-
-  <section class="relative overflow-hidden bg-slate-50 py-24 lg:py-32" id="nosotros">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-10 pointer-events-none">
-      <div class="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full blur-[120px]"></div>
-      <div class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-300 rounded-full blur-[150px]"></div>
-    </div>
- 
-    <div class="container mx-auto px-6 lg:px-12 relative z-10">
-      <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-
-        <div class="w-full lg:w-1/2">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-widest mb-6">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
-            </span>
-            Sobre Nosotros
-          </div>
-
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.1] mb-8">
-            Pureza que trasciende <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">generaciones.</span>
+    <div
+      class="hero-container flex flex-col md:flex-row w-full h-screen overflow-hidden bg-black group"
+      id="inicio"
+    >
+      <div
+        class="split-side split-left relative flex-1 flex items-center justify-center transition-[flex] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden hover:flex-[1.5] group-hover:flex-[0.7] group-hover:hover:flex-[1.5]"
+      >
+        <div class="relative z-10 text-center text-white px-[10%] content">
+          <h2
+            class="text-[clamp(2.5rem,6vw,4.5rem)] leading-none mb-8 uppercase tracking-tighter"
+          >
+            <span class="font-light block text-[0.9em] tracking-[2px]"
+              >Agua</span
+            >
+            <span
+              class="font-black block text-primary drop-shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+              >Purificada</span
+            >
           </h2>
-
-          <p class="text-lg text-slate-600 leading-relaxed mb-10 max-w-xl">
-            En <span class="font-bold text-slate-900">H2A</span>, honramos el legado de la <span class="italic">Hielería Aguiar</span> integrando tecnología de vanguardia. No solo purificamos agua; entregamos la tranquilidad de un producto impecable los 365 días del año.
-          </p>
-
-          <div class="grid grid-cols-3 gap-4 border-t border-slate-200 pt-10">
-            <div class="space-y-1">
-              <div class="flex items-baseline gap-1">
-                <span class="text-3xl md:text-4xl font-black text-blue-600 counter" data-target="365">0</span>
-                <span class="text-blue-600 font-bold">/7</span>
-              </div>
-              <p class="text-[10px] md:text-xs font-bold uppercase tracking-tighter text-slate-400">Disponibilidad Total</p>
-            </div>
-
-            <div class="space-y-1 border-x border-slate-200 px-4">
-              <div class="flex items-baseline gap-1">
-                <span class="text-3xl md:text-4xl font-black text-blue-600 counter" data-target="7">0</span>
-              </div>
-              <p class="text-[10px] md:text-xs font-bold uppercase tracking-tighter text-slate-400">Etapas de Filtrado</p>
-            </div>
-
-            <div class="space-y-1 pl-4">
-              <div class="flex items-baseline gap-1">
-                <span class="text-3xl md:text-4xl font-black text-blue-600 counter" data-target="100">0</span>
-                <span class="text-blue-600 font-bold">%</span>
-              </div>
-              <p class="text-[10px] md:text-xs font-bold uppercase tracking-tighter text-slate-400">Pureza Garantizada</p>
-            </div>
-          </div>
+          <a
+            href="purificadora.html"
+            class="btn-explorar relative inline-block px-9 py-3.5 border-2 border-white/40 text-white font-bold text-[0.8rem] rounded-full uppercase tracking-[2px] overflow-hidden transition-all duration-300 z-[1] hover:text-dark hover:border-white hover:shadow-xl"
+            >Explorar</a
+          >
         </div>
-
-        <div class="w-full lg:w-1/2 relative">
-          <div class="relative group">
-            <div class="absolute -top-6 -right-6 w-full h-full border-2 border-blue-200 rounded-[40px] translate-x-3 translate-y-3 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
-            <div class="relative overflow-hidden rounded-[40px] shadow-2xl shadow-blue-200/50">
-              <img src="H2A/Imagenes/LogoH2A.jpg" alt="Logo H2A" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <div class="absolute -bottom-10 -left-6 md:left-10 bg-white shadow-2xl rounded-3xl p-6 md:p-8 border border-slate-100 max-w-[280px]">
-              <div class="flex items-start gap-4">
-                <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <span class="block text-[10px] font-black uppercase tracking-widest text-blue-600 mb-1">Horario de Servicio</span>
-                  <p class="text-slate-900 font-bold text-lg leading-tight">Lun — Dom</p>
-                  <p class="text-slate-500 font-medium text-sm">5:00 AM — 6:00 PM</p>
-                  <div class="mt-2 inline-block px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded">ABIERTOS HOY</div>
-                </div>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div
+        class="split-side split-right relative flex-1 flex items-center justify-center transition-[flex] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden hover:flex-[1.5] group-hover:flex-[0.7] group-hover:hover:flex-[1.5]"
+      >
+        <div class="relative z-10 text-center text-white px-[10%] content">
+          <h2
+            class="text-[clamp(2.5rem,6vw,4.5rem)] leading-none mb-8 uppercase tracking-tighter"
+          >
+            <span class="font-light block text-[0.9em] tracking-[2px]"
+              >Hielo</span
+            >
+            <span
+              class="font-black block text-[#aadcff] drop-shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+              >Refinado</span
+            >
+          </h2>
+          <a
+            href="hieleria.html"
+            class="btn-explorar relative inline-block px-9 py-3.5 border-2 border-white/40 text-white font-bold text-[0.8rem] rounded-full uppercase tracking-[2px] overflow-hidden transition-all duration-300 z-[1] hover:text-dark hover:border-white hover:shadow-xl"
+            >Explorar</a
+          >
         </div>
       </div>
     </div>
-  </section>
 
-  <section class="py-24 lg:py-32 bg-white overflow-hidden" id="productos">
-    <div class="container mx-auto px-6 lg:px-12">
-
-      <div class="text-center mb-20">
-        <span class="text-blue-600 font-bold uppercase tracking-[0.3em] text-xs">Calidad H2A</span>
-        <h2 class="mt-3 text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tight relative inline-block">
-          Nuestro Catálogo
-          <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full"></span>
-        </h2>
+    <section
+      class="relative overflow-hidden bg-slate-50 py-24 lg:py-32"
+      id="nosotros"
+    >
+      <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-10 pointer-events-none"
+      >
+        <div
+          class="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full blur-[120px]"
+        ></div>
+        <div
+          class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-300 rounded-full blur-[150px]"
+        ></div>
       </div>
 
-      <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-24 mb-24 lg:mb-32 group">
-        <div class="w-full md:w-[40%] flex justify-center">
-          <div class="relative p-4 bg-slate-50 rounded-[2.5rem] border border-slate-100 shadow-xl transition-all duration-700 group-hover:shadow-blue-200/50 group-hover:-translate-y-2">
-            <div class="overflow-hidden rounded-[2rem] aspect-square max-w-[320px]">
-              <img src="H2A/Imagenes/BolsaRolito.png" alt="Hielo Rolito" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-            </div>
-            <div class="absolute -top-4 -right-4 bg-white p-3 rounded-2xl shadow-lg border border-slate-50">
-              <div class="bg-blue-600 text-white p-2 rounded-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full md:w-[60%] text-center md:text-left">
-          <div class="inline-block px-4 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-bold mb-4">Extra Purificado</div>
-          <h4 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Hielo en Rolito</h4>
-          <p class="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto md:mx-0">
-            Nuestros rolitos son <span class="text-slate-900 font-semibold text-blue-600">cristalinos y de lenta fusión</span>. Fabricados con tecnología de vanguardia para asegurar que el sabor de tus bebidas se mantenga intacto de principio a fin.
-          </p>
-          <div class="mt-8 flex justify-center md:justify-start gap-4">
-            <div class="flex items-center gap-2 text-slate-500 font-medium">
-              <span class="w-2 h-2 rounded-full bg-green-500"></span> Grado Alimenticio
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex flex-col md:flex-row-reverse items-center gap-12 lg:gap-24 mb-24 lg:mb-32 group">
-        <div class="w-full md:w-[40%] flex justify-center">
-          <div class="relative p-4 bg-slate-50 rounded-[2.5rem] border border-slate-100 shadow-xl transition-all duration-700 group-hover:shadow-cyan-200/50 group-hover:-translate-y-2">
-            <div class="overflow-hidden rounded-[2rem] aspect-square max-w-[320px]">
-              <img src="H2A/Imagenes/GarrafonNuevo.jpg" alt="Agua Purificada" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-            </div>
-            <div class="absolute -top-4 -left-4 bg-white p-3 rounded-2xl shadow-lg border border-slate-50">
-              <div class="bg-cyan-500 text-white p-2 rounded-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 11v10l8 4" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full md:w-[60%] text-center md:text-left">
-          <div class="inline-block px-4 py-1 rounded-full bg-cyan-50 text-cyan-600 text-sm font-bold mb-4">Ósmosis Inversa</div>
-          <h4 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Agua de Garrafón</h4>
-          <p class="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto md:mx-0">
-            Equilibrio perfecto de minerales. Sometida a un riguroso proceso de <span class="text-cyan-600 font-semibold text-blue-600">carbón activado y luz UV</span>, garantizando que cada gota sea sinónimo de salud e hidratación pura.
-          </p>
-          <div class="mt-8 flex justify-center md:justify-start gap-4 text-slate-500 font-medium">
-            <span class="flex items-center gap-1">
-              <svg class="w-5 h-5 text-cyan-500" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path>
-              </svg>
-              100% Confiable
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-24 group">
-        <div class="w-full md:w-[40%] flex justify-center">
-          <div class="relative p-4 bg-slate-50 rounded-[2.5rem] border border-slate-100 shadow-xl transition-all duration-700 group-hover:shadow-blue-900/20 group-hover:-translate-y-2">
-            <div class="overflow-hidden rounded-[2rem] aspect-square max-w-[320px]">
-              <img src="H2A/Imagenes/Barreton.jpg" alt="Barretones de Hielo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-            </div>
-            <div class="absolute -top-4 -right-4 bg-white p-3 rounded-2xl shadow-lg border border-slate-50">
-              <div class="bg-slate-800 text-white p-2 rounded-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 11v10l8 4" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full md:w-[60%] text-center md:text-left">
-          <div class="inline-block px-4 py-1 rounded-full bg-slate-100 text-slate-700 text-sm font-bold mb-4">Uso Industrial y Comercial</div>
-          <h4 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Barretones de Hielo</h4>
-          <p class="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto md:mx-0">
-            Bloques de alta densidad diseñados para una <span class="text-slate-900 font-semibold">máxima duración</span>. Ideales para conservación a largo plazo, transporte de productos perecederos y eventos de gran escala.
-          </p>
-          <div class="mt-8 flex justify-center md:justify-start gap-4">
-            <div class="flex items-center gap-2 text-slate-500 font-medium">
-              <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
-              Resistencia Térmica Superior
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="py-24 lg:py-32 bg-slate-50" id="pedidos">
-    <div class="container mx-auto px-6">
-      <div class="relative overflow-hidden rounded-[3.5rem] bg-slate-900 shadow-[0_40px_100px_-15px_rgba(15,23,42,0.3)] border border-slate-800">
-
-        <div class="flex flex-col lg:flex-row min-h-[600px]">
-
-          <div class="relative w-full lg:w-1/2 min-h-[300px] lg:min-h-full overflow-hidden">
-            <img src="H2A/Imagenes/Llenogarrafon.jpeg"
-              alt="Proceso de llenado H2A"
-              class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-
-            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/40 via-transparent to-slate-900 lg:to-transparent"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 lg:hidden"></div>
-
-            <div class="absolute top-8 left-8 backdrop-blur-md bg-white/10 border border-white/20 p-4 rounded-3xl hidden md:block">
-              <p class="text-white font-bold text-sm tracking-tight italic">"Calidad que se siente"</p>
-            </div>
-          </div>
-
-          <div class="relative w-full lg:w-1/2 p-8 md:p-16 lg:p-24 flex flex-col justify-center bg-slate-900">
-
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-600/20 blur-[100px] pointer-events-none"></div>
-
-            <div class="relative z-10 text-center lg:text-left">
-              <span class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
-                <span class="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span>
-                Atención Inmediata
+      <div class="container mx-auto px-6 lg:px-12 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+          <div class="w-full lg:w-1/2">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-widest mb-6"
+            >
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"
+                ></span>
               </span>
+              Sobre Nosotros
+            </div>
 
-              <h2 class="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-8">
-                ¿Hacemos tu <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">pedido hoy?</span>
-              </h2>
+            <h2
+              class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.1] mb-8"
+            >
+              Pureza que trasciende
+              <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500"
+                >generaciones.</span
+              >
+            </h2>
 
-              <p class="text-slate-400 text-lg md:text-xl mb-12 max-w-lg leading-relaxed">
-                Frescura garantizada hasta tu puerta. Logística eficiente para que nunca falte <span class="text-white font-bold">H2A</span> en tu hogar.
-              </p>
+            <p class="text-lg text-slate-600 leading-relaxed mb-10 max-w-xl">
+              En <span class="font-bold text-slate-900">H2A</span>, honramos el
+              legado de la
+              <span class="italic">Hielería Aguiar</span> integrando tecnología
+              de vanguardia. No solo purificamos agua; entregamos la
+              tranquilidad de un producto impecable los 365 días del año.
+            </p>
 
-              <div class="flex flex-col sm:flex-row gap-4">
-                <a href="https://wa.me/5213112007410"
-                  class="group relative overflow-hidden bg-[#25D366] text-white px-8 py-5 rounded-2xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 transition-all hover:scale-105 hover:shadow-[0_20px_40px_rgba(37,211,102,0.3)] active:scale-95">
-                  <i class="fab fa-whatsapp text-xl"></i>
-                  WhatsApp
-                  <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                </a>
-
-                <a href="tel:5213112007410"
-                  class="px-8 py-5 rounded-2xl border-2 border-slate-700 text-white font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 transition-all hover:bg-white hover:text-slate-900 active:scale-95">
-                  <i class="fas fa-phone-alt"></i>
-                  Llamar
-                </a>
+            <div class="grid grid-cols-3 gap-4 border-t border-slate-200 pt-10">
+              <div class="space-y-1">
+                <div class="flex items-baseline gap-1">
+                  <span
+                    class="text-3xl md:text-4xl font-black text-blue-600 counter"
+                    data-target="365"
+                    >0</span
+                  >
+                  <span class="text-blue-600 font-bold">/7</span>
+                </div>
+                <p
+                  class="text-[10px] md:text-xs font-bold uppercase tracking-tighter text-slate-400"
+                >
+                  Disponibilidad Total
+                </p>
               </div>
 
-              <div class="mt-12 flex items-center justify-center lg:justify-start gap-4">
-                <div class="flex -space-x-3">
-                  <div class="w-8 h-8 rounded-full border-2 border-slate-900 bg-blue-500 flex items-center justify-center text-[10px] text-white font-bold">H</div>
-                  <div class="w-8 h-8 rounded-full border-2 border-slate-900 bg-cyan-500 flex items-center justify-center text-[10px] text-white font-bold">2</div>
-                  <div class="w-8 h-8 rounded-full border-2 border-slate-900 bg-blue-400 flex items-center justify-center text-[10px] text-white font-bold">A</div>
+              <div class="space-y-1 border-x border-slate-200 px-4">
+                <div class="flex items-baseline gap-1">
+                  <span
+                    class="text-3xl md:text-4xl font-black text-blue-600 counter"
+                    data-target="7"
+                    >0</span
+                  >
                 </div>
-                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
-                  Logística de confianza <span class="text-blue-400">365 días</span>
+                <p
+                  class="text-[10px] md:text-xs font-bold uppercase tracking-tighter text-slate-400"
+                >
+                  Etapas de Filtrado
+                </p>
+              </div>
+
+              <div class="space-y-1 pl-4">
+                <div class="flex items-baseline gap-1">
+                  <span
+                    class="text-3xl md:text-4xl font-black text-blue-600 counter"
+                    data-target="100"
+                    >0</span
+                  >
+                  <span class="text-blue-600 font-bold">%</span>
+                </div>
+                <p
+                  class="text-[10px] md:text-xs font-bold uppercase tracking-tighter text-slate-400"
+                >
+                  Pureza Garantizada
                 </p>
               </div>
             </div>
           </div>
+
+          <div class="w-full lg:w-1/2 relative">
+            <div class="relative group">
+              <div
+                class="absolute -top-6 -right-6 w-full h-full border-2 border-blue-200 rounded-[40px] translate-x-3 translate-y-3 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"
+              ></div>
+              <div
+                class="relative overflow-hidden rounded-[40px] shadow-2xl shadow-blue-200/50"
+              >
+                <img
+                  src="H2A/Imagenes/LogoH2A.jpg"
+                  alt="Logo H2A"
+                  class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div
+                class="absolute -bottom-10 -left-6 md:left-10 bg-white shadow-2xl rounded-3xl p-6 md:p-8 border border-slate-100 max-w-[280px]"
+              >
+                <div class="flex items-start gap-4">
+                  <div
+                    class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <span
+                      class="block text-[10px] font-black uppercase tracking-widest text-blue-600 mb-1"
+                      >Horario de Servicio</span
+                    >
+                    <p class="text-slate-900 font-bold text-lg leading-tight">
+                      Lun — Dom
+                    </p>
+                    <p class="text-slate-500 font-medium text-sm">
+                      5:00 AM — 6:00 PM
+                    </p>
+                    <div
+                      class="mt-2 inline-block px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded"
+                    >
+                      ABIERTOS HOY
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="bg-slate-950 text-slate-400 pt-24 pb-12 relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <section class="py-24 lg:py-32 bg-white overflow-hidden" id="productos">
+      <div class="container mx-auto px-6 lg:px-12">
+        <div class="text-center mb-20">
+          <span
+            class="text-blue-600 font-bold uppercase tracking-[0.3em] text-xs"
+            >Calidad H2A</span
+          >
+          <h2
+            class="mt-3 text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tight relative inline-block"
+          >
+            Nuestro Catálogo
+            <span
+              class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full"
+            ></span>
+          </h2>
+        </div>
 
-    <div class="container mx-auto px-6 lg:px-12 relative z-10">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 pb-20 border-b border-slate-800/60">
+        <div
+          class="flex flex-col md:flex-row items-center gap-12 lg:gap-24 mb-24 lg:mb-32 group"
+        >
+          <div class="w-full md:w-[40%] flex justify-center">
+            <div
+              class="relative p-4 bg-slate-50 rounded-[2.5rem] border border-slate-100 shadow-xl transition-all duration-700 group-hover:shadow-blue-200/50 group-hover:-translate-y-2"
+            >
+              <div
+                class="overflow-hidden rounded-[2rem] aspect-square max-w-[320px]"
+              >
+                <img
+                  src="H2A/Imagenes/BolsaRolito.png"
+                  alt="Hielo Rolito"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+              <div
+                class="absolute -top-4 -right-4 bg-white p-3 rounded-2xl shadow-lg border border-slate-50"
+              >
+                <div class="bg-blue-600 text-white p-2 rounded-xl">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div class="space-y-6">
-          <a href="#" class="text-3xl font-black text-white tracking-tighter inline-block">
-            H2<span class="text-blue-500">A</span>
-          </a>
-          <p class="text-base leading-relaxed max-w-[280px]">
-            Pureza y frescura cristalina que trasciende generaciones. Llevando el legado de <span class="text-white font-medium italic">Hielería Aguiar</span> al siguiente nivel.
-          </p>
-          <div class="flex gap-4">
-            <a href="https://www.facebook.com/profile.php?id=61582324446537" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-white hover:bg-blue-600 transition-colors">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://wa.me/5213112007410" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-white hover:bg-green-500 transition-colors">
-              <i class="fab fa-whatsapp"></i>
-            </a>
+          <div class="w-full md:w-[60%] text-center md:text-left">
+            <div
+              class="inline-block px-4 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-bold mb-4"
+            >
+              Extra Purificado
+            </div>
+            <h4
+              class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight"
+            >
+              Hielo en Rolito
+            </h4>
+            <p
+              class="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto md:mx-0"
+            >
+              Nuestros rolitos son
+              <span class="text-slate-900 font-semibold text-blue-600"
+                >cristalinos y de lenta fusión</span
+              >. Fabricados con tecnología de vanguardia para asegurar que el
+              sabor de tus bebidas se mantenga intacto de principio a fin.
+            </p>
+            <div class="mt-8 flex justify-center md:justify-start gap-4">
+              <div class="flex items-center gap-2 text-slate-500 font-medium">
+                <span class="w-2 h-2 rounded-full bg-green-500"></span> Grado
+                Alimenticio
+              </div>
+            </div>
           </div>
         </div>
 
-        <div>
-          <h5 class="text-white text-sm font-black uppercase tracking-[0.2em] mb-8">Navegación</h5>
-          <ul class="space-y-4">
-            <li>
-              <a href="#inicio" class="group flex items-center gap-2 hover:text-white transition-colors">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                Inicio
-              </a>
-            </li>
-            <li>
-              <a href="#nosotros" class="group flex items-center gap-2 hover:text-white transition-colors">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                Nosotros
-              </a>
-            </li>
-            <li>
-              <a href="#productos" class="group flex items-center gap-2 hover:text-white transition-colors">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                Catálogo
-              </a>
-            </li>
-            <li>
-              <a href="#pedidos" class="group flex items-center gap-2 hover:text-white transition-colors">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                Hacer Pedido
-              </a>
-            </li>
-          </ul>
+        <div
+          class="flex flex-col md:flex-row-reverse items-center gap-12 lg:gap-24 mb-24 lg:mb-32 group"
+        >
+          <div class="w-full md:w-[40%] flex justify-center">
+            <div
+              class="relative p-4 bg-slate-50 rounded-[2.5rem] border border-slate-100 shadow-xl transition-all duration-700 group-hover:shadow-cyan-200/50 group-hover:-translate-y-2"
+            >
+              <div
+                class="overflow-hidden rounded-[2rem] aspect-square max-w-[320px]"
+              >
+                <img
+                  src="H2A/Imagenes/GarrafonNuevo.jpg"
+                  alt="Agua Purificada"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+              <div
+                class="absolute -top-4 -left-4 bg-white p-3 rounded-2xl shadow-lg border border-slate-50"
+              >
+                <div class="bg-cyan-500 text-white p-2 rounded-xl">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 11v10l8 4"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full md:w-[60%] text-center md:text-left">
+            <div
+              class="inline-block px-4 py-1 rounded-full bg-cyan-50 text-cyan-600 text-sm font-bold mb-4"
+            >
+              Ósmosis Inversa
+            </div>
+            <h4
+              class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight"
+            >
+              Agua de Garrafón
+            </h4>
+            <p
+              class="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto md:mx-0"
+            >
+              Equilibrio perfecto de minerales. Sometida a un riguroso proceso
+              de
+              <span class="text-cyan-600 font-semibold text-blue-600"
+                >carbón activado y luz UV</span
+              >, garantizando que cada gota sea sinónimo de salud e hidratación
+              pura.
+            </p>
+            <div
+              class="mt-8 flex justify-center md:justify-start gap-4 text-slate-500 font-medium"
+            >
+              <span class="flex items-center gap-1">
+                <svg
+                  class="w-5 h-5 text-cyan-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  ></path>
+                </svg>
+                100% Confiable
+              </span>
+            </div>
+          </div>
         </div>
 
-        <div>
-          <h5 class="text-white text-sm font-black uppercase tracking-[0.2em] mb-8">Contacto</h5>
+        <div
+          class="flex flex-col md:flex-row items-center gap-12 lg:gap-24 group"
+        >
+          <div class="w-full md:w-[40%] flex justify-center">
+            <div
+              class="relative p-4 bg-slate-50 rounded-[2.5rem] border border-slate-100 shadow-xl transition-all duration-700 group-hover:shadow-blue-900/20 group-hover:-translate-y-2"
+            >
+              <div
+                class="overflow-hidden rounded-[2rem] aspect-square max-w-[320px]"
+              >
+                <img
+                  src="H2A/Imagenes/Barreton.jpg"
+                  alt="Barretones de Hielo"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+              <div
+                class="absolute -top-4 -right-4 bg-white p-3 rounded-2xl shadow-lg border border-slate-50"
+              >
+                <div class="bg-slate-800 text-white p-2 rounded-xl">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 11v10l8 4"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full md:w-[60%] text-center md:text-left">
+            <div
+              class="inline-block px-4 py-1 rounded-full bg-slate-100 text-slate-700 text-sm font-bold mb-4"
+            >
+              Uso Industrial y Comercial
+            </div>
+            <h4
+              class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight"
+            >
+              Barretones de Hielo
+            </h4>
+            <p
+              class="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto md:mx-0"
+            >
+              Bloques de alta densidad diseñados para una
+              <span class="text-slate-900 font-semibold">máxima duración</span>.
+              Ideales para conservación a largo plazo, transporte de productos
+              perecederos y eventos de gran escala.
+            </p>
+            <div class="mt-8 flex justify-center md:justify-start gap-4">
+              <div class="flex items-center gap-2 text-slate-500 font-medium">
+                <svg
+                  class="w-5 h-5 text-blue-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                  />
+                </svg>
+                Resistencia Térmica Superior
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 lg:py-32 bg-slate-50" id="pedidos">
+      <div class="container mx-auto px-6">
+        <div
+          class="relative overflow-hidden rounded-[3.5rem] bg-slate-900 shadow-[0_40px_100px_-15px_rgba(15,23,42,0.3)] border border-slate-800"
+        >
+          <div class="flex flex-col lg:flex-row min-h-[600px]">
+            <div
+              class="relative w-full lg:w-1/2 min-h-[300px] lg:min-h-full overflow-hidden"
+            >
+              <img
+                src="H2A/Imagenes/Llenogarrafon.jpeg"
+                alt="Proceso de llenado H2A"
+                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-slate-900/40 via-transparent to-slate-900 lg:to-transparent"
+              ></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-slate-900 lg:hidden"
+              ></div>
+
+              <div
+                class="absolute top-8 left-8 backdrop-blur-md bg-white/10 border border-white/20 p-4 rounded-3xl hidden md:block"
+              >
+                <p class="text-white font-bold text-sm tracking-tight italic">
+                  "Calidad que se siente"
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="relative w-full lg:w-1/2 p-8 md:p-16 lg:p-24 flex flex-col justify-center bg-slate-900"
+            >
+              <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-600/20 blur-[100px] pointer-events-none"
+              ></div>
+
+              <div class="relative z-10 text-center lg:text-left">
+                <span
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8"
+                >
+                  <span
+                    class="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse"
+                  ></span>
+                  Atención Inmediata
+                </span>
+
+                <h2
+                  class="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-8"
+                >
+                  ¿Hacemos tu <br />
+                  <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300"
+                    >pedido hoy?</span
+                  >
+                </h2>
+
+                <p
+                  class="text-slate-400 text-lg md:text-xl mb-12 max-w-lg leading-relaxed"
+                >
+                  Frescura garantizada hasta tu puerta. Logística eficiente para
+                  que nunca falte
+                  <span class="text-white font-bold">H2A</span> en tu hogar.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href="https://wa.me/5213112007410"
+                    class="group relative overflow-hidden bg-[#25D366] text-white px-8 py-5 rounded-2xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 transition-all hover:scale-105 hover:shadow-[0_20px_40px_rgba(37,211,102,0.3)] active:scale-95"
+                  >
+                    <i class="fab fa-whatsapp text-xl"></i>
+                    WhatsApp
+                    <div
+                      class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+                    ></div>
+                  </a>
+
+                  <a
+                    href="tel:5213112007410"
+                    class="px-8 py-5 rounded-2xl border-2 border-slate-700 text-white font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 transition-all hover:bg-white hover:text-slate-900 active:scale-95"
+                  >
+                    <i class="fas fa-phone-alt"></i>
+                    Llamar
+                  </a>
+                </div>
+
+                <div
+                  class="mt-12 flex items-center justify-center lg:justify-start gap-4"
+                >
+                  <div class="flex -space-x-3">
+                    <div
+                      class="w-8 h-8 rounded-full border-2 border-slate-900 bg-blue-500 flex items-center justify-center text-[10px] text-white font-bold"
+                    >
+                      H
+                    </div>
+                    <div
+                      class="w-8 h-8 rounded-full border-2 border-slate-900 bg-cyan-500 flex items-center justify-center text-[10px] text-white font-bold"
+                    >
+                      2
+                    </div>
+                    <div
+                      class="w-8 h-8 rounded-full border-2 border-slate-900 bg-blue-400 flex items-center justify-center text-[10px] text-white font-bold"
+                    >
+                      A
+                    </div>
+                  </div>
+                  <p
+                    class="text-slate-500 text-[10px] font-bold uppercase tracking-widest"
+                  >
+                    Logística de confianza
+                    <span class="text-blue-400">365 días</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer
+      class="bg-slate-950 text-slate-400 pt-24 pb-12 relative overflow-hidden"
+    >
+      <div
+        class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none"
+      ></div>
+
+      <div class="container mx-auto px-6 lg:px-12 relative z-10">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 pb-20 border-b border-slate-800/60"
+        >
           <div class="space-y-6">
-            <div class="flex items-start gap-4">
-              <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 flex-shrink-0">
-                <i class="fas fa-map-marker-alt"></i>
-              </div>
-              <p class="text-sm">Acaponeta, Nayarit,<br><span class="text-white font-medium">México</span></p>
+            <a
+              href="#"
+              class="text-3xl font-black text-white tracking-tighter inline-block"
+            >
+              H2<span class="text-blue-500">A</span>
+            </a>
+            <p class="text-base leading-relaxed max-w-[280px]">
+              Pureza y frescura cristalina que trasciende generaciones. Llevando
+              el legado de
+              <span class="text-white font-medium italic">Hielería Aguiar</span>
+              al siguiente nivel.
+            </p>
+            <div class="flex gap-4">
+              <a
+                href="https://www.facebook.com/profile.php?id=61582324446537"
+                class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-white hover:bg-blue-600 transition-colors"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="https://wa.me/5213112007410"
+                class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-white hover:bg-green-500 transition-colors"
+              >
+                <i class="fab fa-whatsapp"></i>
+              </a>
             </div>
-            <div class="flex items-start gap-4">
-              <div class="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 flex-shrink-0">
-                <i class="fas fa-phone-alt"></i>
+          </div>
+
+          <div>
+            <h5
+              class="text-white text-sm font-black uppercase tracking-[0.2em] mb-8"
+            >
+              Navegación
+            </h5>
+            <ul class="space-y-4">
+              <li>
+                <a
+                  href="#inicio"
+                  class="group flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
+                  ></span>
+                  Inicio
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#nosotros"
+                  class="group flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
+                  ></span>
+                  Nosotros
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#productos"
+                  class="group flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
+                  ></span>
+                  Catálogo
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#pedidos"
+                  class="group flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
+                  ></span>
+                  Hacer Pedido
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h5
+              class="text-white text-sm font-black uppercase tracking-[0.2em] mb-8"
+            >
+              Contacto
+            </h5>
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 flex-shrink-0"
+                >
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <p class="text-sm">
+                  Acaponeta, Nayarit,<br /><span class="text-white font-medium"
+                    >México</span
+                  >
+                </p>
               </div>
-              <p class="text-sm">Línea Directa:<br><a href="tel:523112007410" class="text-white font-bold hover:text-blue-400 transition-colors">+52 (311) 200 74 10</a></p>
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 flex-shrink-0"
+                >
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                <p class="text-sm">
+                  Línea Directa:<br /><a
+                    href="tel:523112007410"
+                    class="text-white font-bold hover:text-blue-400 transition-colors"
+                    >+52 (311) 200 74 10</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h5
+              class="text-white text-sm font-black uppercase tracking-[0.2em] mb-8"
+            >
+              Disponibilidad
+            </h5>
+            <div
+              class="relative p-6 rounded-[2rem] bg-slate-900 border border-slate-800 shadow-inner overflow-hidden group"
+            >
+              <div
+                class="absolute -bottom-4 -right-4 w-16 h-16 bg-blue-600/10 rounded-full blur-xl group-hover:bg-blue-600/20 transition-colors"
+              ></div>
+
+              <div class="relative z-10">
+                <p
+                  class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2"
+                >
+                  Servicio Continuo
+                </p>
+                <p class="text-white font-black text-lg">Lun — Dom</p>
+                <p
+                  class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 mb-4"
+                >
+                  5:00 AM - 6:00 PM
+                </p>
+                <div
+                  class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-[10px] font-black uppercase"
+                >
+                  <span
+                    class="flex h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"
+                  ></span>
+                  Abierto 365 días
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div>
-          <h5 class="text-white text-sm font-black uppercase tracking-[0.2em] mb-8">Disponibilidad</h5>
-          <div class="relative p-6 rounded-[2rem] bg-slate-900 border border-slate-800 shadow-inner overflow-hidden group">
-            <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-blue-600/10 rounded-full blur-xl group-hover:bg-blue-600/20 transition-colors"></div>
-
-            <div class="relative z-10">
-              <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Servicio Continuo</p>
-              <p class="text-white font-black text-lg">Lun — Dom</p>
-              <p class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 mb-4">
-                5:00 AM - 6:00 PM
-              </p>
-              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-[10px] font-black uppercase">
-                <span class="flex h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                Abierto 365 días
-              </div>
-            </div>
-          </div>
+        <div
+          class="pt-10 flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+          <p class="text-xs font-medium tracking-wide">
+            &copy; 2026 <span class="text-white">H2A — Hielería Aguiar</span>.
+            Todos los derechos reservados.
+          </p>
         </div>
       </div>
+    </footer>
 
-      <div class="pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-        <p class="text-xs font-medium tracking-wide">
-          &copy; 2026 <span class="text-white">H2A — Hielería Aguiar</span>. Todos los derechos reservados.
-        </p>
-      </div>
+    <div class="fixed bottom-8 right-8 z-[110] flex flex-col gap-4">
+      <a
+        href="https://wa.me/5213112007410"
+        target="_blank"
+        class="w-14 h-14 bg-[#25D366] text-white rounded-2xl flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 hover:rotate-6 active:scale-95 shadow-green-500/20"
+      >
+        <i class="fab fa-whatsapp text-2xl"></i>
+      </a>
+
+      <button
+        id="btn-up"
+        class="w-14 h-14 bg-white/20 backdrop-blur-lg border border-slate-200/30 text-slate-900 rounded-2xl flex items-center justify-center shadow-2xl opacity-0 translate-y-10 pointer-events-none transition-all duration-500 hover:bg-blue-600 hover:text-white group"
+      >
+        <i
+          class="fa-solid fa-chevron-up text-xl group-hover:-translate-y-1 transition-transform"
+        ></i>
+      </button>
     </div>
-  </footer>
 
-  <div class="fixed bottom-8 right-8 z-[110] flex flex-col gap-4">
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const menuLinks = document.getElementById("menu-links");
+      const navbar = document.getElementById("navbar");
+      const navLinks = document.querySelectorAll(".nav-link");
 
-    <a href="https://wa.me/5213112007410" target="_blank"
-      class="w-14 h-14 bg-[#25D366] text-white rounded-2xl flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 hover:rotate-6 active:scale-95 shadow-green-500/20">
-      <i class="fab fa-whatsapp text-2xl"></i>
-    </a>
+      // Lógica para abrir/cerrar menú móvil
+      menuBtn.addEventListener("click", () => {
+        menuLinks.classList.toggle("hidden");
+        menuLinks.classList.toggle("flex");
+        // Cambiar icono de barras a X
+        const icon = menuBtn.querySelector("i");
+        icon.classList.toggle("fa-bars");
+        icon.classList.toggle("fa-times");
+      });
 
-    <button id="btn-up"
-      class="w-14 h-14 bg-white/20 backdrop-blur-lg border border-slate-200/30 text-slate-900 rounded-2xl flex items-center justify-center shadow-2xl opacity-0 translate-y-10 pointer-events-none transition-all duration-500 hover:bg-blue-600 hover:text-white group">
-      <i class="fa-solid fa-chevron-up text-xl group-hover:-translate-y-1 transition-transform"></i>
-    </button>
-
-  </div>
-
-  <script>
-    // JS para el Navbar dinámico (Igual que el tuyo pero aplicando clases de Tailwind)
-    window.addEventListener('scroll', () => {
-      const nav = document.getElementById('navbar');
-      const logoSpan = nav.querySelector('.logo-text span');
-      if (window.scrollY > 80) {
-        nav.classList.add('bg-white/95', 'top-0', 'w-full', 'max-w-none', 'rounded-none', 'border-b-2', 'border-primary', 'shadow-lg');
-        nav.classList.remove('bg-dark/80', 'top-5', 'w-[90%]', 'rounded-full', 'border-white/10');
-        nav.querySelectorAll('ul li a, .logo-text').forEach(el => el.style.color = '#0f172a');
-        logoSpan.style.color = '#3a7bd5';
-      } else {
-        nav.classList.remove('bg-white/95', 'top-0', 'w-full', 'max-w-none', 'rounded-none', 'border-b-2', 'border-primary', 'shadow-lg');
-        nav.classList.add('bg-dark/80', 'top-5', 'w-[90%]', 'rounded-full', 'border-white/10');
-        nav.querySelectorAll('ul li a, .logo-text').forEach(el => el.style.color = 'white');
-        logoSpan.style.color = '#00d2ff';
-      }
-    });
-
-    // Contador (Mismo JS que tenías)
-    document.addEventListener("DOMContentLoaded", () => {
-      const counters = document.querySelectorAll('.counter');
-      const speed = 200;
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const counter = entry.target;
-            const updateCount = () => {
-              const target = +counter.getAttribute('data-target');
-              const count = +counter.innerText.replace('%', '');
-              const inc = target / speed;
-
-              if (count < target) {
-                counter.innerText = Math.ceil(count + inc) + (target === 100 && count + inc >= target ? '%' : '');
-                setTimeout(updateCount, 15);
-              } else {
-                counter.innerText = target + (target === 100 ? '%' : '');
-              }
-            };
-            updateCount();
-            observer.unobserve(counter);
+      // Cerrar menú al hacer click en un enlace (móvil)
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth < 768) {
+            menuLinks.classList.add("hidden");
+            menuLinks.classList.remove("flex");
+            menuBtn.querySelector("i").classList.add("fa-bars");
+            menuBtn.querySelector("i").classList.remove("fa-times");
           }
         });
-      }, {
-        threshold: 0.5
       });
 
-      counters.forEach(c => observer.observe(c));
-    });
+      // Navbar dinámico al hacer Scroll
+      window.addEventListener("scroll", () => {
+        const logoSpan = navbar.querySelector(".logo-text span");
+        const menuIcon = menuBtn.querySelector("i");
 
-    const counters = document.querySelectorAll('.counter');
-    const speed = 200;
+        if (window.scrollY > 80) {
+          navbar.classList.add(
+            "bg-white/95",
+            "top-0",
+            "w-full",
+            "max-w-none",
+            "rounded-none",
+            "border-b-2",
+            "border-primary",
+            "shadow-lg",
+          );
+          navbar.classList.remove(
+            "bg-dark/80",
+            "top-5",
+            "w-[90%]",
+            "rounded-full",
+            "border-white/10",
+          );
 
-    const startCounters = () => {
-      counters.forEach(counter => {
-        const updateCount = () => {
-          const target = +counter.getAttribute('data-target');
-          const count = +counter.innerText;
-          const inc = target / speed;
+          // Cambiar colores a oscuro
+          navbar.querySelector(".logo-text").style.color = "#0f172a";
+          logoSpan.style.color = "#3a7bd5";
+          menuIcon.style.color = "#0f172a";
+          navLinks.forEach((el) =>
+            el.classList.replace("text-white/90", "text-slate-700"),
+          );
 
-          if (count < target) {
-            counter.innerText = Math.ceil(count + inc);
-            setTimeout(updateCount, 15);
-          } else {
-            counter.innerText = target;
-          }
-        };
-        updateCount();
-      });
-    };
+          // Ajustar fondo del menú móvil cuando hay scroll
+          menuLinks.classList.replace("bg-dark/95", "bg-white");
+        } else {
+          navbar.classList.remove(
+            "bg-white/95",
+            "top-0",
+            "w-full",
+            "max-w-none",
+            "rounded-none",
+            "border-b-2",
+            "border-primary",
+            "shadow-lg",
+          );
+          navbar.classList.add(
+            "bg-dark/80",
+            "top-5",
+            "w-[90%]",
+            "rounded-full",
+            "border-white/10",
+          );
 
-    // Se activa solo cuando el usuario llega a la sección
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) startCounters();
-    }, {
-      threshold: 0.5
-    });
+          // Volver a colores claros
+          navbar.querySelector(".logo-text").style.color = "white";
+          logoSpan.style.color = "#00d2ff";
+          menuIcon.style.color = "white";
+          navLinks.forEach((el) =>
+            el.classList.replace("text-slate-700", "text-white/90"),
+          );
 
-    observer.observe(document.querySelector('#nosotros'));
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-
-        if (targetElement) {
-          // Desplazamiento suave
-          window.scrollTo({
-            top: targetElement.offsetTop - 80, // Ajuste por si tienes menú fijo
-            behavior: 'smooth'
-          });
-
-          // Elimina el hash (#) de la URL sin recargar la página
-          history.pushState("", document.title, window.location.pathname + window.location.search);
+          // Ajustar fondo del menú móvil original
+          menuLinks.classList.replace("bg-white", "bg-dark/95");
         }
       });
-    });
 
-    // Si la URL contiene Index.php o index.php, la limpia inmediatamente
-    if (window.location.pathname.toLowerCase().endsWith('index.php')) {
-      const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\/index\.php$/i, '/') + window.location.hash;
-      window.history.replaceState(null, null, cleanUrl);
-    }
-
-    // Lógica para mostrar/ocultar el botón de Subir
-    const btnUp = document.getElementById('btn-up');
-
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 400) {
-        btnUp.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
-        btnUp.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-      } else {
-        btnUp.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
-        btnUp.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-      }
-    });
-
-    btnUp.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+      // JS para el Navbar dinámico (Igual que el tuyo pero aplicando clases de Tailwind)
+      window.addEventListener("scroll", () => {
+        const nav = document.getElementById("navbar");
+        const logoSpan = nav.querySelector(".logo-text span");
+        if (window.scrollY > 80) {
+          nav.classList.add(
+            "bg-white/95",
+            "top-0",
+            "w-full",
+            "max-w-none",
+            "rounded-none",
+            "border-b-2",
+            "border-primary",
+            "shadow-lg",
+          );
+          nav.classList.remove(
+            "bg-dark/80",
+            "top-5",
+            "w-[90%]",
+            "rounded-full",
+            "border-white/10",
+          );
+          nav
+            .querySelectorAll("ul li a, .logo-text")
+            .forEach((el) => (el.style.color = "#0f172a"));
+          logoSpan.style.color = "#3a7bd5";
+        } else {
+          nav.classList.remove(
+            "bg-white/95",
+            "top-0",
+            "w-full",
+            "max-w-none",
+            "rounded-none",
+            "border-b-2",
+            "border-primary",
+            "shadow-lg",
+          );
+          nav.classList.add(
+            "bg-dark/80",
+            "top-5",
+            "w-[90%]",
+            "rounded-full",
+            "border-white/10",
+          );
+          nav
+            .querySelectorAll("ul li a, .logo-text")
+            .forEach((el) => (el.style.color = "white"));
+          logoSpan.style.color = "#00d2ff";
+        }
       });
-    });
-  </script>
-</body>
 
+      // Contador (Mismo JS que tenías)
+      document.addEventListener("DOMContentLoaded", () => {
+        const counters = document.querySelectorAll(".counter");
+        const speed = 200;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const counter = entry.target;
+                const updateCount = () => {
+                  const target = +counter.getAttribute("data-target");
+                  const count = +counter.innerText.replace("%", "");
+                  const inc = target / speed;
+
+                  if (count < target) {
+                    counter.innerText =
+                      Math.ceil(count + inc) +
+                      (target === 100 && count + inc >= target ? "%" : "");
+                    setTimeout(updateCount, 15);
+                  } else {
+                    counter.innerText = target + (target === 100 ? "%" : "");
+                  }
+                };
+                updateCount();
+                observer.unobserve(counter);
+              }
+            });
+          },
+          {
+            threshold: 0.5,
+          },
+        );
+
+        counters.forEach((c) => observer.observe(c));
+      });
+
+      const counters = document.querySelectorAll(".counter");
+      const speed = 200;
+
+      const startCounters = () => {
+        counters.forEach((counter) => {
+          const updateCount = () => {
+            const target = +counter.getAttribute("data-target");
+            const count = +counter.innerText;
+            const inc = target / speed;
+
+            if (count < target) {
+              counter.innerText = Math.ceil(count + inc);
+              setTimeout(updateCount, 15);
+            } else {
+              counter.innerText = target;
+            }
+          };
+          updateCount();
+        });
+      };
+
+      // Se activa solo cuando el usuario llega a la sección
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) startCounters();
+        },
+        {
+          threshold: 0.5,
+        },
+      );
+
+      observer.observe(document.querySelector("#nosotros"));
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            // Desplazamiento suave
+            window.scrollTo({
+              top: targetElement.offsetTop - 80, // Ajuste por si tienes menú fijo
+              behavior: "smooth",
+            });
+
+            // Elimina el hash (#) de la URL sin recargar la página
+            history.pushState(
+              "",
+              document.title,
+              window.location.pathname + window.location.search,
+            );
+          }
+        });
+      });
+
+      // Si la URL contiene Index.php o index.php, la limpia inmediatamente
+      if (window.location.pathname.toLowerCase().endsWith("index.php")) {
+        const cleanUrl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname.replace(/\/index\.php$/i, "/") +
+          window.location.hash;
+        window.history.replaceState(null, null, cleanUrl);
+      }
+
+      // Lógica para mostrar/ocultar el botón de Subir
+      const btnUp = document.getElementById("btn-up");
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 400) {
+          btnUp.classList.remove(
+            "opacity-0",
+            "translate-y-10",
+            "pointer-events-none",
+          );
+          btnUp.classList.add(
+            "opacity-100",
+            "translate-y-0",
+            "pointer-events-auto",
+          );
+        } else {
+          btnUp.classList.add(
+            "opacity-0",
+            "translate-y-10",
+            "pointer-events-none",
+          );
+          btnUp.classList.remove(
+            "opacity-100",
+            "translate-y-0",
+            "pointer-events-auto",
+          );
+        }
+      });
+
+      btnUp.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+    </script>
+  </body>
 </html>
