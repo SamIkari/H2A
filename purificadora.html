@@ -242,66 +242,60 @@
 
 
     <script>
-        if (window.location.pathname.includes('purificadora')) {
-            window.history.replaceState(null, null, "/");
-        }
+    document.querySelectorAll('a[href^="#"], a[href="index.html"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
 
-        document.querySelectorAll('a[href^="#"], a[href="/"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '/') {
-                    window.location.href = 'index.php';
-                } else if (href.startsWith('#')) {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        window.scrollTo({
-                            top: target.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                        history.pushState("", document.title, window.location.pathname);
-                    }
+            if (href === 'index.html') {
+                window.location.href = 'index.html';
+            } else if (href.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
                 }
-            });
-        });
-
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            mobileMenu.classList.toggle('pointer-events-none');
-        });
-
-        window.onscroll = function() {
-            const nav = document.getElementById('navbar');
-            if (window.pageYOffset > 50) {
-                nav.classList.add('py-2', 'shadow-lg');
-            } else {
-                nav.classList.remove('py-2', 'shadow-lg');
-            }
-        };
-        // Lógica del Botón Volver Arriba
-        const btnUp = document.getElementById('btn-up');
-
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 400) {
-                // Aparece el botón
-                btnUp.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
-                btnUp.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            } else {
-                // Desaparece el botón
-                btnUp.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
-                btnUp.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
             }
         });
+    });
 
-        btnUp.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        mobileMenu.classList.toggle('pointer-events-none');
+    });
+
+    window.onscroll = function() {
+        const nav = document.getElementById('navbar');
+        if (window.pageYOffset > 50) {
+            nav.classList.add('py-2', 'shadow-lg');
+        } else {
+            nav.classList.remove('py-2', 'shadow-lg');
+        }
+    };
+
+    const btnUp = document.getElementById('btn-up');
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 400) {
+            btnUp.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+            btnUp.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        } else {
+            btnUp.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+            btnUp.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        }
+    });
+
+    btnUp.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
-    </script>
+    });
+</script>
 </body>
 
 </html>

@@ -246,19 +246,17 @@
     </button>
 
     <script>
-        // 1. LIMPIEZA TOTAL DE URL: Si aparece 'hieleria' en la URL, la borra visualmente
-        if (window.location.pathname.includes('hieleria')) {
-            window.history.replaceState(null, null, "/");
-        }
+          
+
 
         // 2. CONTROL DE NAVEGACIÓN
-        document.querySelectorAll('a[href^="#"], a[href="/"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"], a[href="index.html"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
 
                 if (href === '/') {
                     // Al dar clic en Inicio, recarga la raíz limpia
-                    window.location.href = '/';
+                    window.location.href = 'index.html';
                 } else if (href.startsWith('#')) {
                     // Scroll suave para las secciones internas
                     e.preventDefault();
