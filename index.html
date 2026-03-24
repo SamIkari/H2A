@@ -1197,5 +1197,126 @@
         });
       });
     </script>
+
+    <div
+      id="newProductsModal"
+      class="fixed inset-0 z-[2000] flex items-center justify-center hidden opacity-0 transition-all duration-500 p-4"
+    >
+      <div class="absolute inset-0 bg-dark/90 backdrop-blur-md"></div>
+
+      <div
+        class="relative bg-white w-full max-w-5xl rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl transform scale-95 transition-all duration-500 max-h-[95vh] flex flex-col md:flex-row"
+        id="modalContentNewProducts"
+      >
+        <button
+          id="closeModalNewProducts"
+          class="absolute top-4 right-4 w-10 h-10 bg-white/80 backdrop-blur-md shadow-lg rounded-full flex items-center justify-center text-dark hover:bg-red-500 hover:text-white transition-all z-50"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="w-full md:w-1/2 h-56 md:h-auto relative shrink-0">
+          <img
+            src="H2A/Imagenes/ProductoNuevo.jpeg"
+            alt="Nueva línea H2A"
+            class="w-full h-full object-cover"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-white md:hidden"
+          ></div>
+          <div class="absolute top-4 left-4">
+            <span
+              class="bg-primary text-white text-[9px] md:text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-xl"
+              >Nuevo Lanzamiento</span
+            >
+          </div>
+        </div>
+
+        <div
+          class="w-full md:w-1/2 p-6 md:p-12 lg:p-16 overflow-y-auto flex flex-col justify-center"
+        >
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-widest mb-4 self-start"
+          >
+            <span
+              class="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse"
+            ></span>
+            Presentación 2026
+          </div>
+
+          <h3
+            class="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-[1.1] mb-4 tracking-tighter"
+          >
+            La pureza de siempre, <br class="hidden md:block" />
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 text-primary"
+              >ahora para todos.</span
+            >
+          </h3>
+
+          <p class="text-sm md:text-base text-slate-600 mb-8 leading-relaxed">
+            Presentamos nuestra nueva línea oficial. Desde formatos individuales
+            hasta el garrafón familiar, diseñados para acompañarte en cada
+            momento del día con la calidad de <strong>H2A</strong>.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a
+              href="#pedidos"
+              id="btnPedidosModal"
+              class="bg-blue-600 text-white font-bold py-4 px-8 rounded-xl hover:bg-blue-700 transition-all uppercase text-[11px] tracking-widest text-center flex-1"
+            >
+              Pedir Ahora
+            </a>
+            <button
+              id="closeModalTextNewProducts"
+              class="text-slate-400 text-[10px] font-bold py-4 px-6 hover:text-slate-900 transition-colors uppercase tracking-[2px] text-center border border-slate-100 sm:border-none rounded-xl"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const modal = document.getElementById("newProductsModal");
+      const content = document.getElementById("modalContentNewProducts");
+
+      function openModal() {
+        modal.classList.remove("hidden");
+        // Forzamos un reflow para que la animación funcione
+        void modal.offsetWidth;
+        modal.classList.add("opacity-100");
+        content.classList.replace("scale-95", "scale-100");
+        // Bloquear scroll de la página de fondo
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        modal.classList.remove("opacity-100");
+        content.classList.replace("scale-100", "scale-95");
+        setTimeout(() => {
+          modal.classList.add("hidden");
+          document.body.style.overflow = "auto"; // Devolver scroll
+        }, 500);
+      }
+
+      // Abrir a los 1.5 segundos
+      window.addEventListener("load", () => setTimeout(openModal, 1500));
+
+      // Listeners
+      [
+        document.getElementById("closeModalNewProducts"),
+        document.getElementById("closeModalTextNewProducts"),
+        document.getElementById("btnPedidosModal"),
+      ].forEach((el) => {
+        el?.addEventListener("click", closeModal);
+      });
+
+      // Cerrar al clickear fuera
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal.children[0]) closeModal();
+      });
+    </script>
   </body>
 </html>
